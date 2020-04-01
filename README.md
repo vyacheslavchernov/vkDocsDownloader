@@ -17,6 +17,6 @@ A python script for uploading user documents that are in the public domain from 
 	 - `pip install -r requirements.txt`
 
 
-# How it use
+# How to use it
   - Just run 
   `python vkDocsDownloader.py <phone> <password>`
