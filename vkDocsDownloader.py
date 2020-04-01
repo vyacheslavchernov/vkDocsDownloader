@@ -2,16 +2,29 @@ import vk_api
 import requests
 import time
 import os
+import sys
 
 
-auto_skip_delay = 1500
+phone = ''
+password = ''
 
-maxPreviewSize = [1024, 720]
+if(len(sys.argv) == 3):
+    phone = str(sys.argv[1])
+    password = str(sys.argv[2])
+else:
+    print("Please, run with two args - vkDocsDownloader <phone> <password>")
+    sys.exit()
 
-vk_session = vk_api.VkApi('phone', 'password')
-vk_session.auth()
+
+try:
+    vk_session = vk_api.VkApi(phone, password)
+    vk_session.auth()
+except:
+    print("Something broke on auth. Please, check you phone/password")
+    sys.exit()
 
 vk = vk_session.get_api()
+
 
 search_type = ".jpg"
 
@@ -21,7 +34,7 @@ last_search_begin = "-180311475_497458882";
 
 search = vk.docs.search(q=search_type, count= 1000)
 
-images = {"IMG", "DSC", "MG", "KEM", "EM", "SAM", "WP", "Screenshot", "HDR", "img", "2019", "DJI", "Снимок", "P90", "Безымянный", "B612"}
+images = {"IMG", "DSC", "MG", "KEM", "EM", "SAM", "WP", "Screenshot", "HDR", "img", "2019", "DJI", "Снимок", "Безымянный", "P90", "B612"}
 
 sort_by = images
 
